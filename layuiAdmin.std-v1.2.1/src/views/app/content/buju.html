@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>布局</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space5">
+            <div class="layui-col-md12" style="font-size:3em;background-color:gray">通用爬虫平台</div>
+        </div>
+        <div class="layui-row layui-col-space5">
+            <div class="layui-col-md2">
+                <div class="layui-row grid-demo ">
+
+                    <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test">
+                        <!-- 侧边导航<ul class="layui-nav layui-nav-tree layui-nav-side">-->
+
+
+                        <li class="layui-nav-item"><a href="space-mng.html">空间管理</a></li>
+                        <li class="layui-nav-item"><a href="">应用管理</a></li>
+
+                        <li class="layui-nav-item  layui-nav-itemed">
+                            <a href="javascript:;">站点配置
+                                <span class="layui-nav-more"></span>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="hosts-mng.html">站点管理</a></dd>
+                                <dd><a href="">结果格式</a></dd>
+                                <dd><a href="">路径映射规则</a></dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item"><a href="task-mng.html">任务管理</a></li>
+                        <li class="layui-nav-item"><a href="">缓存管理</a></li>
+                        <li class="layui-nav-item"><a href="">主机资源</a></li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="layui-col-md10">
+                <table id="demo" lay-filter="test"></table>
+                <script type="text/html" id="test-table-toolbar-barDemo">
+                    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                </script>
+
+                <script src="../../../layuiadmin/layui/layui.js"></script>
+                <script>
+                layui.use('table', function(){
+                  var table = layui.table;
+
+                  //第一个实例
+                  table.render({
+                    elem: '#demo'
+                    ,height: 312
+                    ,url: '/table_user' //数据接口
+                    ,page: true //开启分页
+                    ,cols: [[ //表头
+                      {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+                      ,{field: 'name', title: '名称', width:150}
+                      ,{field: 'cloud_transfomer', title: '云端转码', width:150}
+                      ,{field: 'other_fields', title: '其他字段', width:150}
+
+                      ,{width:215,align:'center', fixed: 'right', toolbar: '#test-table-toolbar-barDemo'}
+                    ]]
+                  });
+
+                });
+                </script>
+                <div class="layui-row grid-demo grid-demo-bg1">
+                    <div class="layui-col-md12" style="font-size:2em;background-color:#FFF">
+                        内部列
+                    </div>
+                    <div class="layui-col-md12" style="font-size:2em;background-color:#FFF">
+                        内部列
+                    </div>
+                    <div class="layui-col-md12" style="font-size:2em;background-color:#FFF">
+                        内部列
+                    </div>
+                    <div class="layui-col-md12" style="font-size:2em;background-color:#FFF">
+                        内部列
+                    </div>
+                    <div class="layui-col-md12" style="font-size:2em;background-color:#FFF">
+                        内部列
+                    </div>
+                    <div class="layui-col-md12" style="font-size:2em;background-color:#FFF">
+                        内部列
+                    </div>
+                    <div class="layui-col-md12" style="font-size:2em;background-color:#FFF">
+                        内部列
+                    </div>
+                    <div class="layui-col-md12" style="font-size:2em;background-color:#FFF">
+                        内部列
+                    </div>
+                    <div class="layui-col-md12" style="font-size:2em;background-color:#FFF">
+                        内部列
+                    </div>
+                    <div class="layui-col-md12" style="font-size:2em;background-color:#FFF">
+                        内部列
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

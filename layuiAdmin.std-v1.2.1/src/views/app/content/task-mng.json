@@ -1,0 +1,14 @@
+{"code":0
+,"msg":""
+,"count":1
+,"data":[
+  {"space":"云端转码","apply":"小说","task_name":"爬取正版小说1","task_state":"运行中"},
+  {"space":"徐志成","apply":"小说","task_name":"爬取正版小说2","task_state":"已结束"},
+  {"space":"代理","apply":"小说","task_name":"爬取正版小说3","task_state":"运行中"},
+  {"space":"书城","apply":"小说","task_name":"爬取正版小说4","task_state":"已结束"},
+  {"space":"云端转码","apply":"小说","task_name":"爬取正版小说5","task_state":"运行中"},
+  {"space":"云端转码","apply":"小说","task_name":"爬取正版小说6","task_state":"未开始"},
+  {"space":"云端转码","apply":"小说","task_name":"爬取正版小说7","task_state":"运行中"}
+
+
+]}
