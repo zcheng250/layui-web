@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台大布局</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../layui-std/src/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layui-std/src/layuiadmin/style/admin.css" media="all">
+</head>
+<body  class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin" >
+
+    <div class="layui-header layui-bg-cyan">
+        <div class="layui-logo">通用爬虫平台</div>
+
+    </div>
+
+
+    <div class="layui-side layui-bg-cyan" style="margin-top:50px">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test">
+                <!-- 侧边导航<ul class="layui-nav layui-nav-tree layui-nav-side">-->
+
+
+                <li class="layui-nav-item"><a href="space-mng.html">空间管理</a></li>
+                <li class="layui-nav-item"><a href="apply-mng.html">应用管理</a></li>
+
+                <li class="layui-nav-item  layui-nav-itemed">
+                    <a class="javascript:;" href="javascript:;">站点配置
+                        <span class="layui-nav-more"></span>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="hosts-mng.html">站点管理</a></dd>
+                        <dd><a href="result-type.html">结果格式</a></dd>
+                        <dd><a href="result-type.html">路径映射规则</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="task-mng.html">任务管理</a></li>
+                <li class="layui-nav-item"><a href="cache-mng.html">缓存管理</a></li>
+                <li class="layui-nav-item"><a href="hosts-resource.html">主机资源</a></li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <h1 style="text-align:center">路径映射规则</h1>
+
+        <table class="layui-hide" id="test" lay-filter="test"></table>
+
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+
+
+
+</div>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <!--<a class="layui-btn layuiadmin-btn-useradmin" data-type="add" id="addbondTemplate">添加</a>-->
+        <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>-->
+        <!--<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
+    </div>
+</script>
+
+
+
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="../layui-std/src/layuiadmin/layui/layui.js" charset="utf-8"></script>
+<!--<script src="../layui-std/src/layuiadmin/layui/lay/modules/jquery.js" charset="utf-8"></script>-->
+<!--原来的jquery有问题，所以这里采用外部的jQuery-->
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
+<script>
+                layui.use(['table','element'], function(){
+                  var table = layui.table;
+
+                  table.render({
+                    elem: '#test'
+                    ,url:'result-type.json'
+                    ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+
+                    ,title: '用户数据表'
+                    ,cols: [[
+                      {type: 'checkbox', fixed: 'left'}
+
+                      ,{field: 'name', title: '名称', width:450}
+
+                      ,{field: 'other_fields', title: '其他字段', width:450}
+                      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:300}
+                    ]]
+                    ,page: true
+                  });
+
+                  //头工具栏事件
+                  table.on('toolbar(test)', function(obj){
+                    var checkStatus = table.checkStatus(obj.config.id);
+                    switch(obj.event){
+                      case 'getCheckData':
+                        var data = checkStatus.data;
+                        layer.alert(JSON.stringify(data));
+                      break;
+
+                    };
+                  });
+
+                  //监听行工具事件
+                  table.on('tool(test)', function(obj){
+                    var data = obj.data;
+                    //console.log(obj)
+                    if(obj.event === 'del'){
+                      layer.confirm('真的删除行么', function(index){
+                        obj.del();
+                        layer.close(index);
+                      });
+                    } else if(obj.event === 'edit'){
+                      layer.prompt({
+                        formType: 2
+                        ,value: data.email
+                      }, function(value, index){
+                        obj.update({
+                          email: value
+                        });
+                        layer.close(index);
+                      });
+                    }
+                  });
+                });
+                </script>
+</body>
+</html>

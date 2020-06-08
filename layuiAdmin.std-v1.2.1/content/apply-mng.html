@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台大布局</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../layui-std/src/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layui-std/src/layuiadmin/style/admin.css" media="all">
+    <style>
+        .layui-side{
+            margin-top:50px;
+        }
+    </style>
+</head>
+<body  class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin" >
+
+        <div class="layui-header layui-bg-cyan">
+            <div class="layui-logo">通用爬虫平台</div>
+
+        </div>
+
+
+        <div class="layui-side layui-bg-cyan" >
+            <div class="layui-side-scroll">
+                <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test">
+                    <!-- 侧边导航<ul class="layui-nav layui-nav-tree layui-nav-side">-->
+
+
+                    <li class="layui-nav-item"><a href="space-mng.html">空间管理</a></li>
+                    <li class="layui-nav-item"><a href="apply-mng.html">应用管理</a></li>
+
+                    <li class="layui-nav-item  layui-nav-itemed">
+                        <a class="javascript:;" href="javascript:;">站点配置
+                            <span class="layui-nav-more"></span>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="hosts-mng.html">站点管理</a></dd>
+                            <dd><a href="result-type.html">结果格式</a></dd>
+                            <dd><a href="result-type.html">路径映射规则</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item"><a href="task-mng.html">任务管理</a></li>
+                    <li class="layui-nav-item"><a href="cache-mng.html">缓存管理</a></li>
+                    <li class="layui-nav-item"><a href="hosts-resource.html">主机资源</a></li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <h1 style="text-align:center">应用管理</h1>
+
+            <table class="layui-hide" id="test" lay-filter="test"></table>
+
+
+        </div>
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © layui.com - 底部固定区域
+        </div>
+
+
+
+</div>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <a class="layui-btn layuiadmin-btn-useradmin" data-type="add" id="addbondTemplate">添加</a>
+        <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>-->
+        <!--<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
+    </div>
+</script>
+
+<!--添加数据-->
+<script type="text/template" id="bondTemplateList">
+    <div class="layui-card-body" style="padding: 15px;">
+        <form class="layui-form" lay-filter="component-form-group" id="submits" onsubmit="return false">
+            <div class="layui-row layui-col-space10 layui-form-item">
+
+                <input type="hidden" name="edit" value="{{ d.id }}">
+                <p>ID:
+                    <input type="number" name="id" placeholder="请输入ID" autocomplete="off"
+                           lay-verify="required" class="layui-input" value="{{ d.id?d.id:'' }}"
+                            >
+                </p>
+                <p>操作:
+                    <input type="text" name="operation" placeholder="请输入操作" autocomplete="off"
+                           lay-verify="required" class="layui-input" value="{{d.operation?d.operation:''}}"
+                            >
+                </p>
+                <p>启动:
+                    <input type="number" name="start" placeholder="请输入启动" autocomplete="off"
+                           lay-verify="required" class="layui-input" value="{{d.start?d.start:''}}"
+                            >
+                </p>
+                <p>空间名称:
+                    <input type="text" name="spaceName" placeholder="请输入空间名称" autocomplete="off"
+                           lay-verify="required" class="layui-input" value="{{d.spaceName?d.spaceName:''}}"
+                            >
+                </p>
+                <p>IP地址:
+                    <input type="text" name="ipAddress" placeholder="请输入IP地址" autocomplete="off"
+                           lay-verify="required" class="layui-input" value="{{d.ipAddress?d.ipAddress:''}}"
+                            >
+                </p>
+                <p>应用编码:
+                    <input type="text" name="appCode" placeholder="请输入应用编码" autocomplete="off"
+                           lay-verify="required" class="layui-input" value="{{d.appCode?d.appCode:''}}"
+                            >
+                </p>
+                <p>应用名称:
+                    <input type="text" name="appName" placeholder="请输入应用名称" autocomplete="off"
+                           lay-verify="required" class="layui-input" value="{{d.appName?d.appName:''}}"
+                            >
+                </p>
+                <p>singleMax:
+                    <input type="number" name="singleMax" placeholder="请输入singleMax" autocomplete="off"
+                           lay-verify="required" class="layui-input" value="{{d.singleMax?d.singleMax:''}}"
+                            >
+                </p>
+                <p>globalMax:
+                    <input type="number" name="globalMax" placeholder="请输入globalMax" autocomplete="off"
+                           lay-verify="required" class="layui-input" value="{{d.globalMax?d.globalMax:''}}"
+                            >
+                </p>
+
+
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="bond_sumbit">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="../layui-std/src/layuiadmin/layui/layui.js" charset="utf-8"></script>
+<!--<script src="../layui-std/src/layuiadmin/layui/lay/modules/jquery.js" charset="utf-8"></script>-->
+<!--原来的jquery有问题，所以这里采用外部的jQuery-->
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
+<script>
+
+                layui.use(['table','element','util','laytpl','form','jquery'], function(){
+                  var table = layui.table;
+                  var form = layui.form;
+                  var laytpl=layui.laytpl;
+                  var admin=layui.admin;
+                  var element=layui.element;
+
+                  table.render({
+                    elem: '#test'
+
+                    ,url:'http://localhost:8080/applicationlist/selectall'
+                    ,parseData: function(res){ //res 即为原始返回的数据
+                    	console.log(res);
+                    	var count=res.length;
+                        return {
+                          "code": 0, //解析接口状态
+                          "msg": "", //解析提示文本
+                          "count": count, //解析数据长度
+                          "data": res //解析数据列表
+                        };
+                      }
+                    ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+
+                    ,title: '用户数据表'
+                    ,cols: [[
+                      {type: 'checkbox', fixed: 'left'}
+                      ,{field: 'id', title: 'ID', width:100, sort: true, fixed: 'left'}
+                      ,{field: 'operation', title: '操作', width:80, sort: true, fixed: 'left'}
+                      ,{field: 'updateTime', title: '更新时间', width:200, sort: true, fixed: 'left'}
+                      ,{field: 'start', title: '启动', width:70}
+                      ,{field: 'spaceName', title: '空间名称', width:150}
+                      ,{field: 'ipAddress', title: 'IP地址', width:150}
+                      ,{field: 'appCode', title: '应用编码', width:150}
+                      ,{field: 'appName', title: '应用名称', width:150}
+                      ,{field: 'singleMax', title: '单点最大爬取数量', width:150}
+                      ,{field: 'globalMax', title: '全局最大爬取数量', width:150}
+                      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                    ]]
+                    ,page: true
+                    ,id:'apply-mng'
+                  });
+
+                  //头工具栏事件
+                  table.on('toolbar(test)', function(obj){
+                    var checkStatus = table.checkStatus(obj.config.id);
+                    switch(obj.event){
+                      case 'getCheckData':
+                        var data = checkStatus.data;
+                        layer.alert(JSON.stringify(data));
+                      break;
+
+                    };
+                  });
+                    //添加
+                  $(document).on('click', '#addbondTemplate', function () {
+                        var data = [];
+                        data.list = layui.data('bondTemplateList').list;
+                        var content = $("#bondTemplateList").html();
+                        laytpl(content).render(data, function (string) {
+                            layer.open({
+                                type: 1,
+                                title: "添加数据",
+                                area: ['800px', '800px'], //宽高
+                                content: string
+                            });
+                            form.render('select');
+                        });
+                    });
+
+                    /* 监听提交 */
+                    form.on('submit(bond_sumbit)', function (data) {
+                        console.log(data.field);
+                        $.ajax({
+                            url: data.field.edit > 0 ? 'http://localhost:8080/applicationlist/update':'http://localhost:8080/applicationlist/insert',
+                            data: data.field,
+                            contentType:'application/json',
+                            method:'get',
+                            success:function () {
+                                console.log("add success");
+                                layer.closeAll();
+                                table.reload('apply-mng');
+                            }
+                        });
+                    });
+
+                  //监听行工具事件
+                  table.on('tool(test)', function(obj){
+                    var data = obj.data;
+                    console.log(obj);
+                    if(obj.event === 'del'){
+                      layer.confirm('真的删除行么', function(index){
+                        $.ajax({
+                            url:'http://localhost:8080/applicationlist/delete',
+                            data:{id:data.id},
+                            method:'get',
+                            contentType:'application/json',
+                            success:function(){
+                                obj.del();
+                                layer.close(index);
+                                table.reload('apply-mng');
+                            }
+                        });
+
+                      });
+                    } else if(obj.event === 'edit'){
+                      data.list = layui.data('bondTemplateList').list;
+                        var content = $("#bondTemplateList").html();
+                        laytpl(content).render(data, function (string) {
+                            layer.open({
+                                type: 1,
+                                title: "编辑数据",
+                                area: ['800px', '900px'], //宽高
+                                content: string
+                            });
+                            form.render('select');
+                        });
+                    }
+                  });
+                });
+                </script>
+</body>
+</html>
